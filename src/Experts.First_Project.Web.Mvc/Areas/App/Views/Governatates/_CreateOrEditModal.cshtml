@@ -1,0 +1,32 @@
+﻿
+@using System.Globalization
+@using Experts.First_Project.Web.Areas.App.Models.Common.Modals
+@using Experts.First_Project.Web.Areas.App.Models.Governatates
+@model CreateOrEditGovernatateModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditGovernatate")) : L("CreateNewGovernatate")))
+
+<div class="modal-body">
+    <div id="GovernatateInformationsTab">
+        <form name="GovernatateInformationsForm" role="form" novalidate class="form-validation">
+
+            @if (Model.IsEditMode)
+            {
+            <input type="hidden" name="id" value="@Model.Governatate.Id" />
+            }
+
+            <div class="form-group">
+                <label for="Governatate_code">@L("code")</label>
+                <input class="form-control" id="Governatate_code" value="@Model.Governatate.code" type="text" name="code" required maxlength="@Experts.First_Project.Startup.GovernatateConsts.MaxcodeLength" minlength="@Experts.First_Project.Startup.GovernatateConsts.MincodeLength" />
+            </div>
+
+            <div class="form-group">
+                <label for="Governatate_Name">@L("Name")</label>
+                <input class="form-control" id="Governatate_Name" value="@Model.Governatate.Name" type="text" name="name" required maxlength="@Experts.First_Project.Startup.GovernatateConsts.MaxNameLength" minlength="@Experts.First_Project.Startup.GovernatateConsts.MinNameLength" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

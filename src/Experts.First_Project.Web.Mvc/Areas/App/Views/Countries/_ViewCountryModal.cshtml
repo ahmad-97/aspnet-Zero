@@ -1,0 +1,26 @@
+﻿
+@using Experts.First_Project.Web.Areas.App.Models.Common.Modals
+@using Experts.First_Project.Web.Areas.App.Models.Countries
+@model CountryViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="CountryInformationsTab">
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Code") :</h6>
+                @Model.Country.Code
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Desc") :</h6>
+                @Model.Country.Desc
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")

@@ -1,0 +1,49 @@
+﻿
+@using System.Globalization
+@using Experts.First_Project.Web.Areas.App.Models.Common.Modals
+@using Experts.First_Project.Web.Areas.App.Models.Cities
+@model CreateOrEditCityModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCity")) : L("CreateNewCity")))
+
+<div class="modal-body">
+    <div id="CityInformationsTab">
+        <form name="CityInformationsForm" role="form" novalidate class="form-validation">
+
+            @if (Model.IsEditMode)
+            {
+            <input type="hidden" name="id" value="@Model.City.Id" />
+            }
+
+            <div class="form-group m-form__group">
+                <label for="GovernatateName">@L("Governatate")</label>
+                <div class="input-group">
+                    <input class="form-control" id="GovernatateName" name="governatateName" value="@Model.GovernatateName" type="text" disabled>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary blue" id="OpenGovernatateLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                    </div>
+                    <div class="input-group-prepend">
+                        <button class="btn btn-danger btn-icon" type="button" id="ClearGovernatateNameButton"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.IsEditMode)
+            {
+            <input class="form-control" id="City_GovernatateId" value="@Model.City.GovernatateId" type="text" name="governatateId" required hidden />
+            }
+            else
+            {
+            <input class="form-control" id="City_GovernatateId" value="" type="text" name="governatateId" required hidden />
+            }
+
+            <div class="form-group">
+                <label for="City_Name">@L("Name")</label>
+                <input class="form-control" id="City_Name" value="@Model.City.Name" type="text" name="name" required maxlength="@Experts.First_Project.Setup.CityConsts.MaxNameLength" minlength="@Experts.First_Project.Setup.CityConsts.MinNameLength" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")
